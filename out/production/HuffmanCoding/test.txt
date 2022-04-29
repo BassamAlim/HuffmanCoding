@@ -1,2 +1,1 @@
-During you need to form a binary the construction of Huffman tree, use the priority queue to select nodes with smallest frequencies. Once you have constructed the tree, traverse the tree and create a dictionary of codewords (letter to code). Given any new sentences, your system must show how
-the sentence is converted to Huffman code and then decoded back to original sentence.
+huffman coding first creates a tree using the frequencies of the character and then generates code for each character

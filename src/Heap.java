@@ -75,7 +75,7 @@ public class Heap {    // Min Heap
     }
 
     public void display() {
-        for (int i = 1; i <= (size / 2) - 1; i++) {
+        for (int i = 1; i <= (size / 2); i++) {
             System.out.println(
                     " PARENT : " + heap[i]
                             + " LEFT CHILD : " + heap[2 * i]

@@ -13,19 +13,16 @@ public class Encoder {
 
     public HashMap<Character, String> encode() {
         String fileStr = getFileStr();
+
         List<Data> charList = extractChars(fileStr);
+
         PriorityQueue<Data> pq = new PriorityQueue<>(charList);
 
         Heap heap = createHeap(pq);
-        System.out.println("Heap Size: " + heap.getSize());
 
         BST bst = createBST(heap);
-        System.out.println("BST Size: " + bst.getSize());
 
-        HashMap<Character, String> map = bst.getMap();
-        System.out.println("MapSize: " + map.size());
-
-        return map;
+        return bst.getMap();
     }
 
     private String getFileStr() {
@@ -74,23 +71,10 @@ public class Encoder {
     private Heap createHeap(PriorityQueue<Data> chars) {
         Heap heap = new Heap(chars.size());
 
-        while (!chars.isEmpty()) {
-            Data data = chars.poll();
-            heap.insert(new Node(data));
-        }
+        while (!chars.isEmpty())
+            heap.insert(new Node(chars.poll()));
 
         return heap;
-    }
-
-    private PriorityQueue<Node> createPQ(PriorityQueue<Data> chars) {
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-
-        while (!chars.isEmpty()) {
-            Data data = chars.poll();
-            pq.add(new Node(data));
-        }
-
-        return pq;
     }
 
     private BST createBST(Heap heap) {
@@ -101,7 +85,12 @@ public class Encoder {
             Node node2 = heap.remove();
             node2.appendToKey(1);
 
-            Node newNode = new Node(new Data("N" + counter++, 0), node1, node2);
+            Node newNode = new Node(new Data("N" + counter++,
+                    node1.getData().getFreq() + node2.getData().getFreq()), node1, node2);
+
+            System.out.println("PARENT: " + newNode);
+            System.out.println("CHILD1: " + node1);
+            System.out.println("CHILD2: " + node2);
 
             heap.insert(newNode);
         }
