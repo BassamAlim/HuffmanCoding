@@ -36,6 +36,11 @@ public class Heap {    // Min Heap
         if (isLeaf(pos))
             return;
 
+        if (rightChild(pos) > size && heap[pos].getData().getFreq() > heap[leftChild(pos)].getData().getFreq()) {
+            swap(pos, leftChild(pos));
+            return;
+        }
+
         if (heap[pos].getData().getFreq() > heap[leftChild(pos)].getData().getFreq() ||
                 heap[pos].getData().getFreq() > heap[rightChild(pos)].getData().getFreq()) {
             if (heap[leftChild(pos)].getData().getFreq() < heap[rightChild(pos)].getData().getFreq()) {
@@ -56,7 +61,7 @@ public class Heap {    // Min Heap
         heap[++size] = element;
 
         int current = size;
-        while (heap[current].getData().getFreq() < heap[parent(current)].getData().getFreq()) {
+        while (heap[current].getData().getFreq() <= heap[parent(current)].getData().getFreq()) {
             swap(current, parent(current));
             current = parent(current);
         }
@@ -65,8 +70,7 @@ public class Heap {    // Min Heap
     public Node remove() {
         Node popped = heap[1];
         heap[1] = heap[size--];
-        if (size > 1)
-            heapify(1);
+        heapify(1);
         return popped;
     }
 

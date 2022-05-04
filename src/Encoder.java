@@ -1,19 +1,17 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class Encoder {
 
-    private final String fileName;
+    private final String fileStr;
 
-    public Encoder(String fileName) {
-        this.fileName = fileName;
+    public Encoder(String fileStr) {
+        this.fileStr = fileStr;
     }
 
     public HashMap<Character, String> encode() {
-        String fileStr = getFileStr();
-
         List<Data> charList = extractChars(fileStr);
 
         PriorityQueue<Data> pq = new PriorityQueue<>(charList);
@@ -23,25 +21,6 @@ public class Encoder {
         BST bst = createBST(heap);
 
         return bst.getMap();
-    }
-
-    private String getFileStr() {
-        StringBuilder str = new StringBuilder();
-        File file = new File("src/" + fileName);
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new FileReader(file));
-            while (true) {
-                String line = br.readLine();
-                if (line == null)
-                    break;
-
-                str.append(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return str.toString();
     }
 
     private List<Data> extractChars(String str) {
@@ -71,8 +50,11 @@ public class Encoder {
     private Heap createHeap(PriorityQueue<Data> chars) {
         Heap heap = new Heap(chars.size());
 
-        while (!chars.isEmpty())
-            heap.insert(new Node(chars.poll()));
+        while (!chars.isEmpty()) {
+            Data c = chars.poll();
+            System.out.println("C: " + c);
+            heap.insert(new Node(c));
+        }
 
         return heap;
     }
@@ -85,14 +67,8 @@ public class Encoder {
             Node node2 = heap.remove();
             node2.appendToKey(1);
 
-            Node newNode = new Node(new Data("N" + counter++,
-                    node1.getData().getFreq() + node2.getData().getFreq()), node1, node2);
-
-            System.out.println("PARENT: " + newNode);
-            System.out.println("CHILD1: " + node1);
-            System.out.println("CHILD2: " + node2);
-
-            heap.insert(newNode);
+            heap.insert(new Node(new Data("N" + counter++,
+                    node1.getData().getFreq() + node2.getData().getFreq()), node1, node2));
         }
 
         return new BST(heap.remove());
