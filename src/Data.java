@@ -2,10 +2,12 @@ public class Data implements Comparable<Data> {
 
     private String c;
     private int freq;
+    private final int order;
 
-    public Data(String c, int freq) {
+    public Data(String c, int freq, int order) {
         this.c = c;
         this.freq = freq;
+        this.order = order;
     }
 
     public String getC() {
@@ -28,6 +30,10 @@ public class Data implements Comparable<Data> {
         freq++;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
     @Override
     public String toString() {
         return "Data{" +
@@ -38,6 +44,8 @@ public class Data implements Comparable<Data> {
 
     @Override
     public int compareTo(Data o) {
+        if (freq == o.freq)
+            return order - o.order;
         return freq - o.freq;
     }
 }

@@ -7,7 +7,7 @@ public class Heap {    // Min Heap
     public Heap(int maxSize) {
         this.maxSize = maxSize;
         heap = new Node[maxSize + 1];
-        heap[0] = new Node(new Data("$$$", 0));
+        heap[0] = new Node(new Data("$$$", 0, 0));
     }
 
     private int parent(int pos) {
@@ -36,13 +36,9 @@ public class Heap {    // Min Heap
         if (isLeaf(pos))
             return;
 
-        if (rightChild(pos) > size && heap[pos].getData().getFreq() > heap[leftChild(pos)].getData().getFreq()) {
-            swap(pos, leftChild(pos));
-            return;
-        }
-
         if (heap[pos].getData().getFreq() > heap[leftChild(pos)].getData().getFreq() ||
                 heap[pos].getData().getFreq() > heap[rightChild(pos)].getData().getFreq()) {
+
             if (heap[leftChild(pos)].getData().getFreq() < heap[rightChild(pos)].getData().getFreq()) {
                 swap(pos, leftChild(pos));
                 heapify(leftChild(pos));
@@ -61,7 +57,7 @@ public class Heap {    // Min Heap
         heap[++size] = element;
 
         int current = size;
-        while (heap[current].getData().getFreq() <= heap[parent(current)].getData().getFreq()) {
+        while (heap[current].getData().getFreq() < heap[parent(current)].getData().getFreq()) {  // maybe <=
             swap(current, parent(current));
             current = parent(current);
         }
@@ -70,7 +66,8 @@ public class Heap {    // Min Heap
     public Node remove() {
         Node popped = heap[1];
         heap[1] = heap[size--];
-        heapify(1);
+        if (size != 0)
+            heapify(1);
         return popped;
     }
 
@@ -82,14 +79,16 @@ public class Heap {    // Min Heap
         int left,right;
         for (int i = 1; i <= size / 2; i++) {
             System.out.print("PARENT: C: " + heap[i].getData().getC() + ", Freq: " + heap[i].getData().getFreq());
-            right = 2 * i + 1;
             left = 2 * i;
+            right = 2 * i + 1;
             if (left <= size)
-                System.out.print(" -- LEFT CHILD: C: " + heap[2 * i].getData().getC()+", Freq: " + heap[i].getData().getFreq());
+                System.out.print(" -- LEFT CHILD: C: " + heap[left].getData().getC() +
+                        ", Freq: " + heap[left].getData().getFreq());
             else
                 System.out.print(" -- LEFT CHILD: NULL");
             if (right <= size)
-                System.out.print(" -- RIGHT CHILD: C: " + heap[2 * i + 1].getData().getC() + ", Freq: " + heap[i].getData().getFreq());
+                System.out.print(" -- RIGHT CHILD: C: " + heap[right].getData().getC() +
+                        ", Freq: " + heap[right].getData().getFreq());
             else
                 System.out.print(" -- RIGHT CHILD: NULL");
             System.out.println();

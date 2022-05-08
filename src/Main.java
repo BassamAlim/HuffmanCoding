@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        Encoder encoder = new Encoder(getFileStr("test3.txt"));
+        Encoder encoder = new Encoder(getFileStr("test4.txt"));
         HashMap<Character, String> dict = encoder.encode();
         System.out.println();
         display(dict);

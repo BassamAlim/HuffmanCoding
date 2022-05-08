@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Encoder {
 
@@ -13,7 +10,6 @@ public class Encoder {
 
     public HashMap<Character, String> encode() {
         List<Data> charList = extractChars(fileStr);
-
         PriorityQueue<Data> pq = new PriorityQueue<>(charList);
         System.out.println("\nPQ Size: " + pq.size());
 
@@ -24,6 +20,8 @@ public class Encoder {
         heap.display();
 
         BST bst = createBST(heap);
+        System.out.println("\nBST: ");
+        bst.displayTree();
 
         return bst.getMap();
     }
@@ -36,7 +34,7 @@ public class Encoder {
 
             int lookup = find(c, chars);
             if (lookup == -1)
-                chars.add(new Data(String.valueOf(c), 1));
+                chars.add(new Data(String.valueOf(c), 1, i));
             else
                 chars.get(lookup).incFreq();
         }
@@ -72,8 +70,12 @@ public class Encoder {
             Node node2 = heap.remove();
             node2.appendToKey(1);
 
-            heap.insert(new Node(new Data("N" + counter++,
-                    node1.getData().getFreq() + node2.getData().getFreq()), node1, node2));
+            System.out.println("L: " + node1.getData());
+            System.out.println("R: " + node2.getData());
+
+            heap.insert(new Node(new Data("N" + counter,
+                    node1.getData().getFreq() + node2.getData().getFreq(), counter), node1, node2));
+            counter++;
         }
 
         return new BST(heap.remove());
