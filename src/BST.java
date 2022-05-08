@@ -9,14 +9,6 @@ public class BST {
         this.root = root;
     }
 
-    public Node getRoot() {
-        return root;
-    }
-
-    public int getSize() {
-        return root.getSize();
-    }
-
     public HashMap<Character, String> getMap() {
         HashMap<Character, String> map = new HashMap<>();
 

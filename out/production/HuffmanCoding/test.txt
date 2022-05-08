@@ -1,1 +1,0 @@
-huffman coding first creates a tree using the frequencies of the character and then generates code for each character

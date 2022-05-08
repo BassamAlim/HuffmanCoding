@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
-        Encoder encoder = new Encoder(getFileStr("test.txt"));
+        Encoder encoder = new Encoder(getFileStr("test3.txt"));
         HashMap<Character, String> dict = encoder.encode();
         System.out.println();
         display(dict);
@@ -13,7 +13,7 @@ public class Main {
 
     private static String getFileStr(String fileName) {
         StringBuilder str = new StringBuilder();
-        File file = new File("src/" + fileName);
+        File file = new File(fileName);
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(file));

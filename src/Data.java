@@ -30,7 +30,7 @@ public class Data implements Comparable<Data> {
 
     @Override
     public String toString() {
-        return "Pair{" +
+        return "Data{" +
                 "c=" + c +
                 ", freq=" + freq +
                 '}';

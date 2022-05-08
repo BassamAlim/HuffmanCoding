@@ -15,8 +15,13 @@ public class Encoder {
         List<Data> charList = extractChars(fileStr);
 
         PriorityQueue<Data> pq = new PriorityQueue<>(charList);
+        System.out.println("\nPQ Size: " + pq.size());
 
+        System.out.println("PQ:");
         Heap heap = createHeap(pq);
+
+        System.out.println("\nHeap:");
+        heap.display();
 
         BST bst = createBST(heap);
 

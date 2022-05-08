@@ -79,11 +79,20 @@ public class Heap {    // Min Heap
     }
 
     public void display() {
-        for (int i = 1; i <= (size / 2); i++) {
-            System.out.println(
-                    " PARENT : " + heap[i]
-                            + " LEFT CHILD : " + heap[2 * i]
-                            + " RIGHT CHILD :" + heap[2 * i + 1]);
+        int left,right;
+        for (int i = 1; i <= size / 2; i++) {
+            System.out.print("PARENT: C: " + heap[i].getData().getC() + ", Freq: " + heap[i].getData().getFreq());
+            right = 2 * i + 1;
+            left = 2 * i;
+            if (left <= size)
+                System.out.print(" -- LEFT CHILD: C: " + heap[2 * i].getData().getC()+", Freq: " + heap[i].getData().getFreq());
+            else
+                System.out.print(" -- LEFT CHILD: NULL");
+            if (right <= size)
+                System.out.print(" -- RIGHT CHILD: C: " + heap[2 * i + 1].getData().getC() + ", Freq: " + heap[i].getData().getFreq());
+            else
+                System.out.print(" -- RIGHT CHILD: NULL");
+            System.out.println();
         }
     }
 }
