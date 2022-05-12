@@ -25,7 +25,7 @@ public class Main {
         System.out.printf("You improved the size by %.2f%s", (1.0 * alphaSize / betaSize * 100), percent);
 
 
-        System.out.println("\n////////////////////   Ejnd of Encoder and start of Decoder   ////////////////////////\n");
+        System.out.println("\n////////////////////   End of Encoder and start of Decoder   ////////////////////////\n");
 
         Decoder decoder = new Decoder(code, tree);
         String original = decoder.decode();
