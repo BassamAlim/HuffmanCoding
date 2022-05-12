@@ -6,32 +6,37 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        String fileStr = getFileStr("nm.txt");
-        int betaSize = fileStr.length() * 8;
-        Encoder encoder = new Encoder(fileStr);
-        BST tree = encoder.encode();
+        String fileStr = getFileStr("nm.txt");    // the file to be encoded
+
+        Huffman huffman = new Huffman();    // the class with the processing methods
+
+        BST tree = huffman.encode(fileStr);
         HashMap<Character, String> map = new HashMap<>();
         tree.getMap(map, tree.getRoot());
 
         System.out.println();
         map.forEach((character, string) -> System.out.println(character + " -> " + string));
 
-        String code = toCode(fileStr, map);
-        int alphaSize = code.length();
+        String code = huffman.toCode(fileStr, map);
+        int oldSize = fileStr.length() * 8;
+        int newSize = code.length();
         System.out.println("\nCODE:\n" + code);
 
-        System.out.println("\nNaive Size: " + betaSize + " bit  ---  Compressed Size: " + alphaSize + " bit");
+        System.out.println("\nOld Size: " + oldSize + " bit  ---  New Size: " + newSize + " bit");
         String percent = "%";
-        System.out.printf("You improved the size by %.2f%s", (1.0 * alphaSize / betaSize * 100), percent);
-
+        System.out.printf("You improved the size by %.2f%s\n", (1.0 * newSize / oldSize * 100), percent);
 
         System.out.println("\n////////////////////   End of Encoder and start of Decoder   ////////////////////////\n");
 
-        Decoder decoder = new Decoder(code, tree);
-        String original = decoder.decode();
+        String original = huffman.decode(code, tree);
         System.out.println("Original: \n" + original);
     }
 
+    /**
+     * Returns the file specified by the filename as a string
+     *
+     * @param fileName The name of the file (the file must be located in the project directory)
+     */
     private static String getFileStr(String fileName) {
         StringBuilder str = new StringBuilder();
         File file = new File(fileName);
@@ -49,15 +54,6 @@ public class Main {
             e.printStackTrace();
         }
         return str.toString();
-    }
-
-    private static String toCode(String original, HashMap<Character, String> dict) {
-        StringBuilder code = new StringBuilder();
-
-        for (int i = 0; i < original.length(); i++)
-            code.append(dict.get(original.charAt(i)));
-
-        return code.toString();
     }
 
 }

@@ -1,6 +1,6 @@
 public class Node implements Comparable<Node> {
 
-    private String key = "";    // code
+    private String key = "";    // the encoded 01 string we want
     private final Data data;
     private Node leftC;
     private Node rightC;
@@ -19,6 +19,11 @@ public class Node implements Comparable<Node> {
         return key;
     }
 
+    /**
+     * adds a digit (0 or 1) to the beginning of the code of the current node and all it's successors
+     *
+     * @param n The Digit to be added
+     */
     public void appendToKey(int n) {
         key = n + key;
 
@@ -53,5 +58,5 @@ public class Node implements Comparable<Node> {
     @Override
     public int compareTo(Node o) {
         return key.compareTo(o.key);
-    }
+    }    // compare two nodes (for the priority queue)
 }
