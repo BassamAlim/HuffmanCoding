@@ -57,7 +57,7 @@ public class Heap {    // Min Heap
         heap[++size] = element;
 
         int current = size;
-        while (heap[current].getData().getFreq() < heap[parent(current)].getData().getFreq()) {  // maybe <=
+        while (heap[current].getData().getFreq() < heap[parent(current)].getData().getFreq()) {
             swap(current, parent(current));
             current = parent(current);
         }

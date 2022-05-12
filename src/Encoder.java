@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class Encoder {
 
@@ -8,7 +10,7 @@ public class Encoder {
         this.fileStr = fileStr;
     }
 
-    public HashMap<Character, String> encode() {
+    public BST encode() {
         List<Data> charList = extractChars(fileStr);
         PriorityQueue<Data> pq = new PriorityQueue<>(charList);
         System.out.println("\nPQ Size: " + pq.size());
@@ -23,7 +25,7 @@ public class Encoder {
         System.out.println("\nBST: ");
         bst.displayTree();
 
-        return bst.getMap();
+        return bst;
     }
 
     private List<Data> extractChars(String str) {
@@ -70,11 +72,9 @@ public class Encoder {
             Node node2 = heap.remove();
             node2.appendToKey(1);
 
-            System.out.println("L: " + node1.getData());
-            System.out.println("R: " + node2.getData());
-
             heap.insert(new Node(new Data("N" + counter,
                     node1.getData().getFreq() + node2.getData().getFreq(), counter), node1, node2));
+
             counter++;
         }
 
