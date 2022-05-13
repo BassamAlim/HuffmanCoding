@@ -75,15 +75,16 @@ public class BST {
     /**
      * Displays the BST using recursion when given the root
      *
-     * @param node The current node it's printing (initially the root)
+     * @param prefix a string to be put before the text
+     * @param n The current node it's printing (initially the root)
+     * @param isLeft a boolean specifying if the side of the tree
      */
-    public void display(Node node) {
-        if (node == null)
-            return;
-
-        System.out.println(node);
-
-        display(node.getLeftC());
-        display(node.getRightC());
+    public void print(String prefix, Node n, boolean isLeft) {
+        if (n != null) {
+            System.out.println(prefix + (isLeft ? "|-- " : "\\-- ") + n.getData().getC());
+            print(prefix + (isLeft ? "|   " : "    "), n.getLeftC(), true);
+            print(prefix + (isLeft ? "|   " : "    "), n.getRightC(), false);
+        }
     }
+
 }

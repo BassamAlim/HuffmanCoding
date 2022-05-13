@@ -1,3 +1,11 @@
-hello
-my name is ahmad !
-how are you !, are you a student also?
+Huffman Encoding is one of the simplest algorithms to compress data. Even though it is very
+old and simple , it is still widely used (eg : in few stages of JPEG, MPEG etc). In this project you 
+will implement Huffman encoding and decoding. You can read up in Wikipedia or any other 
+tutorial.
+Your system must accept a file and (Huffman) tree for the same.
+During you need to form a binary the construction of Huffman tree, use the priority queue to select 
+nodes with smallest frequencies. Once you have constructed the tree, traverse the tree and create a 
+dictionary of codewords (letter to code). Given any new sentences, your system must show how 
+the sentence is converted to Huffman code and then decoded back to original sentence.
+Note that you must implement BST and Heap yourself and must not rely on any language libraries. 
+You can use external libraries like GraphViz to display your Huffman tree.

@@ -1,3 +1,5 @@
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +25,7 @@ public class Huffman {
 
         BST bst = createBST(heap);
         System.out.println("\nBST: ");
-        bst.display(bst.getRoot());
+        bst.print("", bst.getRoot(), false);
 
         return bst;
     }

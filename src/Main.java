@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        String fileStr = getFileStr("nm.txt");    // the file to be encoded
+        String fileStr = getFileStr("test.txt");    // the file to be encoded
 
         Huffman huffman = new Huffman();    // the class with the processing methods
 
