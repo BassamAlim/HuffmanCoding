@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.HashMap;
 
 public class Main {
@@ -21,6 +19,7 @@ public class Main {
         int oldSize = fileStr.length() * 8;
         int newSize = code.length();
         System.out.println("\nCODE:\n" + code);
+        writeToFile(code);
 
         System.out.println("\nOld Size: " + oldSize + " bit  ---  New Size: " + newSize + " bit");
         String percent = "%";
@@ -53,6 +52,14 @@ public class Main {
             e.printStackTrace();
         }
         return str.toString();
+    }
+
+    private static void writeToFile(String content) {
+        try (OutputStream out = new FileOutputStream("output.bin")) {
+            out.write(content.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
