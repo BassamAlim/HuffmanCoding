@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
 public class Node implements Comparable<Node> {
 
     private String key = "";    // the encoded 01 string we want

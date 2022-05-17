@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String fileStr = getFileStr("test.txt");    // the file to be encoded
 
-        Huffman huffman = new Huffman();    // the class with the processing methods
+        Huffman huffman = new Huffman();
 
         BST tree = huffman.encode(fileStr);
         HashMap<Character, String> map = new HashMap<>();
@@ -47,7 +47,6 @@ public class Main {
                 String line = br.readLine();
                 if (line == null)
                     break;
-
                 str.append(line);
             }
         } catch (Exception e) {
